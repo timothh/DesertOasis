@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Desert Oasis - COSC 3306</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { overflow: hidden; background: #000; font-family: Arial, sans-serif; }
+    canvas { display: block; }
+
+    /* HUD overlay */
+    #hud {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      color: white;
+      text-shadow: 1px 1px 3px black;
+      pointer-events: none;
+      z-index: 10;
+    }
+    #hud h2 { font-size: 18px; margin-bottom: 8px; }
+    #hud p  { font-size: 13px; line-height: 1.8; }
+
+    /* Crosshair */
+    #crosshair {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px; height: 20px;
+      pointer-events: none;
+      z-index: 10;
+    }
+    #crosshair::before, #crosshair::after {
+      content: '';
+      position: absolute;
+      background: rgba(255,255,255,0.8);
+    }
+    #crosshair::before { width: 2px; height: 100%; left: 50%; transform: translateX(-50%); }
+    #crosshair::after  { width: 100%; height: 2px; top: 50%;  transform: translateY(-50%); }
+
+    /* Click-to-start overlay */
+    #startScreen {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      z-index: 20;
+      cursor: pointer;
+    }
+    #startScreen h1 { font-size: 36px; margin-bottom: 12px; }
+    #startScreen p  { font-size: 16px; color: #ccc; }
+  </style>
+</head>
+<body>
+
+  <!-- Click to start / pointer lock screen -->
+  <div id="startScreen">
+    <h1>🏜️ Desert Oasis</h1>
+    <p>Click anywhere to enter the scene</p>
+    <p style="margin-top:8px; font-size:13px;">WASD = Move &nbsp;|&nbsp; Mouse = Look &nbsp;|&nbsp; N = Toggle Night</p>
+  </div>
+
+  <!-- Crosshair (visible when pointer is locked) -->
+  <div id="crosshair" style="display:none;"></div>
+
+  <!-- Controls HUD -->
+  <div id="hud">
+    <h2>🏜️ Desert Oasis</h2>
+  </div>
+
+  <!-- Three.js loaded as ES module from CDN -->
+   <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
